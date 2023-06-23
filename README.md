@@ -1,6 +1,24 @@
-# Salesforce DX Project: Next Steps
+# About
+AppExchange にある [List Editor](https://appexchange.salesforce.com/appxListingDetail?listingId=a0N4V00000Fz2VxUAJ&tab=d)　 アプリのカスタマイズバージョンです。案件の要件によってカスタマイズしました。
+オリジナルソースコード > https://github.com/SalesforceLabs/ListEditor
 
-Now that you’ve created a Salesforce DX project, what’s next? Here are some documentation resources to get you started.
+
+# How to deploy
+
+## Pre requisites 
+Visual studio code
+Already setup sfdx environment at vs code
+
+
+## Deployment
+open code folder at vs code
+check which org is being logged in at vs code > sfdx force:org:display
+authorize target org in vs code > Ctrl+Shift+p
+select SFDX:Authorize an org > select Production > press Enter 
+when the browser window open > log in with org credentials in which we want to deploy
+go back to vs code > folder > force-app/main/default
+right click on default folder and click on Deploy source to org
+
 
 ## How Do You Plan to Deploy Your Changes?
 
