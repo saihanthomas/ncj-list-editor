@@ -1,0 +1,40 @@
+/**
+ * Copyright 2020 salesforce.com, inc
+ * All rights reserved.
+ * SPDX-License-Identifier: BSD-3-Clause
+ * For full license text, see the LICENSE file in the repo root or https://opensource.org/licenses/BSD-3-Clause
+ */
+.THIS .infoTip {
+  display: none;
+  width: 20rem;
+  white-space: normal;
+  position: absolute;
+  bottom: 30px;
+}
+
+.THIS .infoIcon {
+  display: inline;
+}
+
+.THIS .infoIcon:hover + .infoTip {
+  display: inline-block;
+}
+
+.THIS .leftSide {
+  right: -15px;
+}
+
+.THIS .rightSide {
+  left: -15px;
+}
+
+.THIS.errotTooltip {
+  position: relative;
+}
+
+@media all and (min-width: 768px) {
+  .THIS .leftSide {
+    right: 30px;
+    bottom: -15px !important;
+  }
+}

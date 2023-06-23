@@ -1,0 +1,39 @@
+/**
+ * Copyright 2020 salesforce.com, inc
+ * All rights reserved.
+ * SPDX-License-Identifier: BSD-3-Clause
+ * For full license text, see the LICENSE file in the repo root or https://opensource.org/licenses/BSD-3-Clause
+ */
+@media (min-width: 10em) and (max-width: 48em) {
+  .THIS .custom-static-position-small-screens {
+    position: static !important;
+  }
+}
+
+.THIS .slds-lookup__menu {
+  padding: 0.15rem 0 !important;
+}
+
+.THIS .slds-lookup__active {
+  background-color: #f3f2f2;
+}
+
+.THIS .lookField-pill {
+  width: 100%;
+  background-color: white;
+}
+
+.THIS .lookField-pill.disabled {
+  background-color: rgb(243,242,242);
+}
+
+.THIS .lookField-pill_button {
+  margin-bottom: 2px;
+  margin-left: 2px;
+}
+
+.THIS lightning-icon.slds-icon--small.slds-icon-standard-case.slds-icon_container.search {
+  float: left;
+  margin-right: 0.25rem;
+  margin-top: 0.5rem;
+}
