@@ -31,9 +31,7 @@ public with sharing class CommList_RelatedListEditorCC {
     for (Schema.SobjectField strFldObj : fieldMap.values()) {
       iterateFieldName = strFldObj.getDescribe().getName();
 
-      if (iterateFieldName.endsWithIgnoreCase('LE_Order__c')) {
-        prefixOrderField = iterateFieldName;
-        break;
+      if (iterateFieldName.endsWithIgnoreCase('LE_Order__c')) { prefixOrderField = iterateFieldName; break;
       }
     }
 
@@ -79,8 +77,7 @@ public with sharing class CommList_RelatedListEditorCC {
     String orderName = '';
     String firstParent;
     Boolean parentMatched = false;
-    Boolean hasParsonalAccount = (sObjectName.equalsIgnoreCase('account') &&
-    fieldMap.get('LastName') != null);
+    Boolean hasParsonalAccount = (sObjectName.equalsIgnoreCase('account') && fieldMap.get('LastName') != null);
     String relationRegExp = '__c$';
 
     if (!String.isEmpty(recordId)) {
@@ -91,15 +88,13 @@ public with sharing class CommList_RelatedListEditorCC {
     GetRecordListResult result = new GetRecordListResult();
     result.objectName = dsr.getName();
 
-    if (fields.containsIgnoreCase('recordtypeid')) {
-      fields = checkAndRemoveInvalidRecordType(fields, dsr);
+    if (fields.containsIgnoreCase('recordtypeid')) { fields = checkAndRemoveInvalidRecordType(fields, dsr);
     }
 
     for (Schema.SobjectField strFld : fieldMap.values()) {
       if (
         strFld.getDescribe().getType() == Schema.DisplayType.ENCRYPTEDSTRING
-      ) {
-        result.encryptedFields.add(strFld.getDescribe().getName());
+      ) { result.encryptedFields.add(strFld.getDescribe().getName());
       }
 
       if (strFld.getDescribe().getType() == Schema.DisplayType.REFERENCE) {
@@ -161,8 +156,7 @@ public with sharing class CommList_RelatedListEditorCC {
               firstParent = strFld.getDescribe().getName();
             }
 
-            if (strFld.getDescribe().getName().equalsIgnoreCase(parentField)) {
-              parentMatched = true;
+            if (strFld.getDescribe().getName().equalsIgnoreCase(parentField)) { parentMatched = true;
             }
           }
         }
@@ -195,8 +189,7 @@ public with sharing class CommList_RelatedListEditorCC {
       } else if (
         (('account'.equalsIgnoreCase(tObjectName) && hasParsonalAccount) ||
         'contact'.equalsIgnoreCase(tObjectName) ||
-        'lead'.equalsIgnoreCase(tObjectName)) &&
-        'name'.endsWithIgnoreCase(strFld.getDescribe().getName())
+        'lead'.equalsIgnoreCase(tObjectName)) && 'name'.endsWithIgnoreCase(strFld.getDescribe().getName())
       ) {
         fields += (', FirstName, LastName');
       } else if (
@@ -219,16 +212,13 @@ public with sharing class CommList_RelatedListEditorCC {
     // Creating the query.
     String query;
 
-    if (!String.isBlank(orderField)) {
-      orderName = orderField;
+    if (!String.isBlank(orderField)) { orderName = orderField;
     }
 
     String order = isOrderDESC == true
-      ? ' DESC NULLS LAST'
-      : ' ASC NULLS FIRST';
+      ? ' DESC NULLS LAST' : ' ASC NULLS FIRST';
     String strOrder = String.isBlank(orderName)
-      ? ' ORDER BY LastModifiedDate' + order
-      : ' ORDER BY ' + String.escapeSingleQuotes(orderName) + order + ', LastModifiedDate DESC ';
+      ? ' ORDER BY LastModifiedDate' + order : ' ORDER BY ' + String.escapeSingleQuotes(orderName) + order + ', LastModifiedDate DESC ';
 
     String strFilter = replaceQueryFilter(filter);
     Integer recLimit = Integer.valueOf(limitRecs);
@@ -291,9 +281,7 @@ public with sharing class CommList_RelatedListEditorCC {
             feildType == Schema.DisplayType.String ||
             feildType == Schema.DisplayType.Email ||
             feildType == Schema.DisplayType.Phone ||
-            feildType == Schema.DisplayType.Picklist ||
-            feildType == Schema.DisplayType.Combobox ||
-            feildType == Schema.DisplayType.URL
+            feildType == Schema.DisplayType.Picklist || feildType == Schema.DisplayType.Combobox || feildType == Schema.DisplayType.URL
           ) {
             searchWhere += field + ' LIKE \'%' + escapeSearchText + '%\'';
             searchWhere += ' OR ';
@@ -343,8 +331,7 @@ public with sharing class CommList_RelatedListEditorCC {
         searchWhereJoin = searchWhere.equals('') ? '' : ' AND ' + searchWhere;
       }
 
-      if (!searchWhere.equals('') && searchWhereJoin.equals('')) {
-        searchWhereJoin = ' WHERE ' + searchWhere;
+      if (!searchWhere.equals('') && searchWhereJoin.equals('')) { searchWhereJoin = ' WHERE ' + searchWhere;
       }
 
       query =
@@ -382,8 +369,7 @@ public with sharing class CommList_RelatedListEditorCC {
         searchWhereJoin = searchWhere.equals('') ? '' : ' AND ' + searchWhere;
       }
 
-      if (!searchWhere.equals('') && searchWhereJoin.equals('')) {
-        searchWhereJoin = ' WHERE ' + searchWhere;
+      if (!searchWhere.equals('') && searchWhereJoin.equals('')) { searchWhereJoin = ' WHERE ' + searchWhere;
       }
 
       query =
@@ -402,8 +388,7 @@ public with sharing class CommList_RelatedListEditorCC {
         String.escapeSingleQuotes(offset);
     }
 
-    if (String.isBlank(query)) {
-      return null;
+    if (String.isBlank(query)) { return null;
     }
 
     //System.debug('query: ' + query);
@@ -418,8 +403,7 @@ public with sharing class CommList_RelatedListEditorCC {
       result.hasMoreRecord = false;
     }
 
-    if (!result.encryptedFields.isEmpty()) {
-      records = hideEncryptedField(records, result.encryptedFields);
+    if (!result.encryptedFields.isEmpty()) { records = hideEncryptedField(records, result.encryptedFields);
     }
 
     // Get record tpye
@@ -710,8 +694,7 @@ public with sharing class CommList_RelatedListEditorCC {
       objSchemaDescribe
     );
     String strTabStyle = CommList_RelatedListEditorCC.getTabStyle(objectName);
-    tarGetDataRelated.tabStyle = String.isBlank(strTabStyle)
-      ? 'standard:custom'
+    tarGetDataRelated.tabStyle = String.isBlank(strTabStyle) ? 'standard:custom'
       : strTabStyle;
 
     return tarGetDataRelated;
@@ -721,8 +704,7 @@ public with sharing class CommList_RelatedListEditorCC {
     Schema.DescribeSObjectResult dsr
   ) {
     for (Schema.RecordTypeInfo rti : dsr.getRecordTypeInfos()) {
-      if (rti.isDefaultRecordTypeMapping() && !rti.isMaster()) {
-        return rti.getRecordTypeId();
+      if (rti.isDefaultRecordTypeMapping() && !rti.isMaster()) { return rti.getRecordTypeId();
       }
     }
     return '';
@@ -791,8 +773,7 @@ public with sharing class CommList_RelatedListEditorCC {
     String objectName
   ) {
     Set<String> setNotEmpty = new Set<String>(lstShowFieldsSetting);
-    Boolean hasParsonalAccount = (objectName.equalsIgnoreCase('account') &&
-    fieldMap.get('LastName') != null);
+    Boolean hasParsonalAccount = (objectName.equalsIgnoreCase('account') && fieldMap.get('LastName') != null);
 
     // remove blanks and nulls
     setNotEmpty.remove('');
@@ -818,8 +799,7 @@ public with sharing class CommList_RelatedListEditorCC {
         lstLowerCase.indexOf(compoundFieldNm.toLowerCase()) > -1
       ) {
         if (
-          !(objectName.equalsIgnoreCase('account') &&
-          field.equalsIgnoreCase('name'))
+          !(objectName.equalsIgnoreCase('account') && field.equalsIgnoreCase('name'))
         ) {
           lstPosDelField.add(lstShowFieldsSetting.indexOf(field));
         }
@@ -849,9 +829,7 @@ public with sharing class CommList_RelatedListEditorCC {
       }
 
       if (
-        hasParsonalAccount &&
-        ('account'.equalsIgnoreCase(objectName)) &&
-        'name'.equalsIgnoreCase(field)
+        hasParsonalAccount && ('account'.equalsIgnoreCase(objectName)) && 'name'.equalsIgnoreCase(field)
       ) {
         mapPosAddField.put(
           lstShowFieldsSetting.indexOf(field),
@@ -1029,8 +1007,7 @@ public with sharing class CommList_RelatedListEditorCC {
         if (
           sObjectName.equalsIgnoreCase('Contact') &&
           String.isBlank(parentField) &&
-          (objectName.equalsIgnoreCase('Opportunity') ||
-          objectName.equalsIgnoreCase('Contract'))
+          (objectName.equalsIgnoreCase('Opportunity') || objectName.equalsIgnoreCase('Contract'))
         ) {
           List<SObject> lstExtendAdd = new List<SObject>();
 
@@ -1233,26 +1210,20 @@ public with sharing class CommList_RelatedListEditorCC {
            */
           Integer scale = fieldDescribe.getScale();
           ColumnInfo info = new ColumnInfo(
-            fieldName,
-            'number',
-            fieldDescribe.getLabel()
+            fieldName, 'number', fieldDescribe.getLabel()
           );
           info.typeAttribute = new TypeAttributes(scale);
           infos.add(info);
         } else if (String.valueOf(fieldDescribe.getType()) == 'CURRENCY') {
           Integer scale = fieldDescribe.getScale();
           ColumnInfo info = new ColumnInfo(
-            fieldName,
-            'currency',
-            fieldDescribe.getLabel()
+            fieldName, 'currency', fieldDescribe.getLabel()
           );
           info.typeAttribute = new TypeAttributes(scale);
           infos.add(info);
         } else if (strFld.getDescribe().isCalculated()) {
           ColumnInfo info = new ColumnInfo(
-            fieldName,
-            'calculated',
-            fieldDescribe.getLabel()
+            fieldName, 'calculated', fieldDescribe.getLabel()
           );
           infos.add(info);
         } else {
@@ -1315,8 +1286,7 @@ public with sharing class CommList_RelatedListEditorCC {
     if (flowNames != null && flowNames.size() > 0) {
       flowInfo = [
         SELECT Id, ApiName, Label
-        FROM FlowDefinitionView
-        WHERE ApiName IN :flowNames
+        FROM FlowDefinitionView WHERE ApiName IN :flowNames
       ];
     }
 
@@ -1330,8 +1300,7 @@ public with sharing class CommList_RelatedListEditorCC {
    */
   @AuraEnabled(cacheable=true)
   public static String getTabStyle(String objectName) {
-    if (objectName == 'OpportunityLineItem') {
-      objectName = 'Product2';
+    if (objectName == 'OpportunityLineItem') { objectName = 'Product2';
     }
 
     List<Schema.DescribeTabSetResult> tabSetDesc = Schema.describeTabs();
@@ -1367,9 +1336,7 @@ public with sharing class CommList_RelatedListEditorCC {
         //large lightning icon image
         if (ir.getURL().contains('/custom/')) {
           //Icon is from the Custom Sprite
-          String iconTag = ir.getURL()
-            .substringBetween('custom/', '.png')
-            .substringBefore('_');
+          String iconTag = ir.getURL().substringBetween('custom/', '.png').substringBefore('_');
           return 'custom:' + iconTag;
         } else if (ir.getURL().contains('/standard/')) {
           //Icon is from the Standard Sprite
