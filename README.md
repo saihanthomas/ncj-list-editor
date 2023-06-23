@@ -19,6 +19,25 @@ when the browser window open > log in with org credentials in which we want to d
 go back to vs code > folder > force-app/main/default <br>
 right click on default folder and click on Deploy source to org <br>
 
+# Readme from original creator
+
+## Installation
+
+<a href="https://githubsfdeploy.herokuapp.com?owner=SalesforceLabs&repo=ListEditor&ref=v1.15">
+  <img alt="Deploy to Salesforce"
+       src="https://raw.githubusercontent.com/afawcett/githubsfdeploy/master/deploy.png">
+</a>
+
+## 詳細な設定マニュアルはコチラ ↓
+日本語  
+[https://salesforce.quip.com/ysAYAmh31aTG](https://salesforce.quip.com/ysAYAmh31aTG)  
+  
+## Check here setup detail manuals
+English  
+[https://salesforce.quip.com/WPbbAiZrEx6r](https://salesforce.quip.com/WPbbAiZrEx6r)
+
+
+# other
 
 ## How Do You Plan to Deploy Your Changes?
 
