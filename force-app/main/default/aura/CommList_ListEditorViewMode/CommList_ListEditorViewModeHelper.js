@@ -5,18 +5,38 @@
 ({
   reloadData: function(component, event) {
     let recordList = component.get('v.recordList');
-    let isHaveNoError = component.get('v.isHaveNoError');
-    let recordTypes = component.get('v.recordTypes');
-
-    if (isHaveNoError) {
-      this.getColumnDefinitions(component, recordList);
-      this.getObjectLabel(component);
-      this.getRelationshipName(component);
-      this.getTabStyle(component);
-
-      if (recordTypes.length) {
-        component.set('v.recordTypeId', recordTypes.some((rt) => rt.checked).value);
+    let idSet = new Set();
+    let hasDuplicates = false;
+    
+    for (let i = recordList.length - 1; i >= 0; i--) {
+      let id = recordList[i].Id;
+      if (idSet.has(id)) {
+        hasDuplicates = true;
+        break;
       }
+      idSet.add(id);
+    }
+    // If the 'Id' key in recordList has duplicated values, call the refreshRecordListEvent
+    if (hasDuplicates) {
+      const compEvent = component.getEvent('refreshRecordList');
+        compEvent.setParams({
+          type: 'refresh'
+        });
+        compEvent.fire();
+    }else {
+        let isHaveNoError = component.get('v.isHaveNoError');
+        let recordTypes = component.get('v.recordTypes');
+        
+        if (isHaveNoError) {
+          this.getColumnDefinitions(component, recordList);
+          this.getObjectLabel(component);
+          this.getRelationshipName(component);
+          this.getTabStyle(component);
+    
+          if (recordTypes.length) {
+            component.set('v.recordTypeId', recordTypes.some((rt) => rt.checked).value);
+          }
+        }
     }
   },
   getColumnDefinitions: function(component, recordList) {
@@ -487,6 +507,7 @@
 
   getTabStyle: function(component) {
     let action = component.get('c.getTabStyle');
+    var objName = component.get('v.objectName');
 
     action.setParams({
       objectName: component.get('v.objectName')
@@ -496,9 +517,20 @@
     action.setCallback(this, function(a) {
       // store the response return value (wrapper class insatance)
       let result = a.getReturnValue();
-
+      console.log(result);
+      
       if (result == '') {
-        result = 'standard:custom';
+          if (objName == 'QuoteDetail__c') {
+            result = 'custom:custom21';
+          } else if (objName == 'OrderReceivedDetail__c') {
+            result = 'custom:custom8';
+          } else if (objName == 'DeliveredProductDetail__c') {
+            result = 'custom:custom72';
+          } else if (objName == 'BillingDetail__c') {
+            result = 'custom:custom88';
+          } else {
+            result = 'standard:custom';
+          }
       }
 
       // set the component attributes value with wrapper class properties.
@@ -516,6 +548,9 @@
     // enqueue the action
     $A.enqueueAction(action);
   },
+  
+ 
+  
   handleEditRow: function(component, event) {
     let recordId = component.get('v.selectedRowId');
     let editRecordEvent = $A.get('e.force:editRecord');
