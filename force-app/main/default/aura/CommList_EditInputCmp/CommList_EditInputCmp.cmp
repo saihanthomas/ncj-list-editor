@@ -99,7 +99,7 @@
                           step="{!v.scale}"
                           required="{!v.isRequired}"
                         />
-                        <div class="rsuix_counter_box">
+                        <!-- <div class="rsuix_counter_box">
                           <lightning:buttonIcon
                             class="rsuix_counter_button rsuix_inc_button"
                             iconName="utility:up"
@@ -114,24 +114,42 @@
                             size="small"
                             variant="bare"
                           />
-                        </div>
+                        </div> -->
                       </div>
+                      <!-- input width adjust for Name field -->
                       <aura:set attribute="else">
-                        <lightning:input
-                          aura:id="myStandardInput"
-                          class="{! and(empty(v.value), v.isRequired) ? v.inputClass + ' slds-has-error' : v.inputClass }"
-                          value="{!v.value}"
-                          type="{!v.subType}"
-                          onchange="{!c.onChange}"
-                          placeholder="{!v.placeholder}"
-                          formatter="{!v.formatType}"
-                          step="{!v.scale}"
-                          required="{!v.isRequired}"
-                        />
+                          <aura:if isTrue="{!v.name == 'Name'}">
+                           <lightning:input
+                              aura:id="myStandardInput"
+                              class="{! and(empty(v.value), v.isRequired) ? v.inputClass + ' name-field-width slds-has-error' : v.inputClass + ' name-field-width' }"
+                              value="{!v.value}"
+                              type="{!v.subType}"
+                              onchange="{!c.onChange}"
+                              placeholder="{!v.placeholder}"
+                              formatter="{!v.formatType}"
+                              step="{!v.scale}"
+                              required="{!v.isRequired}"
+                            />
+                              <aura:set attribute="else">
+                                     <lightning:input
+                                      aura:id="myStandardInput"
+                                      class="{! and(empty(v.value), v.isRequired) ? v.inputClass + ' slds-has-error' : v.inputClass }"
+                                      value="{!v.value}"
+                                      type="{!v.subType}"
+                                      onchange="{!c.onChange}"
+                                      placeholder="{!v.placeholder}" 
+                                      formatter="{!v.formatType}"
+                                      step="{!v.scale}"
+                                      required="{!v.isRequired}"
+                                    />
+                          </aura:set>
+                         </aura:if>
                       </aura:set>
                     </aura:if>
                   </aura:set>
                 </aura:if>
+                <!-- hide clear button -->
+                <!-- 
                 <aura:if
                   isTrue="{!and(and(not(empty(v.value)), not(v.subType == 'date')), not(v.subType == 'datetime-local'))}"
                 >
@@ -148,6 +166,7 @@
                     />
                   </button>
                 </aura:if>
+					-->
               </div>
             </div>
           </aura:set>
