@@ -19,14 +19,16 @@ when the browser window open > log in with org credentials in which we want to d
 go back to vs code > folder > force-app/main/default <br>
 right click on default folder and click on Deploy source to org <br>
 
-# Readme from original creator
+## OR
+Click on this button 
 
-## Installation
-
-<a href="https://githubsfdeploy.herokuapp.com?owner=SalesforceLabs&repo=ListEditor&ref=v1.15">
+<a href="https://githubsfdeploy.herokuapp.com/app/githubdeploy/saihanthomas/ncj-list-editor?ref=main">
   <img alt="Deploy to Salesforce"
        src="https://raw.githubusercontent.com/afawcett/githubsfdeploy/master/deploy.png">
 </a>
+
+
+# Readme from original creator
 
 ## 詳細な設定マニュアルはコチラ ↓
 日本語  
