@@ -22,7 +22,7 @@ right click on default folder and click on Deploy source to org <br>
 ## OR
 Click on this button 
 
-<a href="https://githubsfdeploy.herokuapp.com/app/githubdeploy/saihanthomas/ncj-list-editor?ref=main">
+<a href="https://githubsfdeploy.herokuapp.com/app/githubdeploy/saihanthomas/ncj-list-editor?ref=main2">
   <img alt="Deploy to Salesforce"
        src="https://raw.githubusercontent.com/afawcett/githubsfdeploy/master/deploy.png">
 </a>
